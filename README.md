@@ -8,8 +8,8 @@ A template for quickly developing projects with Typescript and Rollup.
 
 ```bash
 # Clone it from Github.
-$ git clone https://github.com/HarryXiong24/typescript-webpack-start.git
-$ cd typescript-webpack-start
+$ git clonehttps://github.com/HarryXiong24/rollup-ts-starter.git
+$ cd rollup-ts-starter
 ```
 
 ```bash
