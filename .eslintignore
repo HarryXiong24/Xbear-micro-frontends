@@ -7,3 +7,4 @@ jest.config.ts
 coverages
 rollup.config.js
 types
+commitlint.config.js

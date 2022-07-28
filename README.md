@@ -1,8 +1,8 @@
-# rollup-ts-starter
+# rollup-ts-kit-starter
 
 ## Description
 
-A template for quickly developing projects with Typescript and Rollup.
+A template for quickly developing kits with Typescript and Rollup.
 
 ## Usage
 
