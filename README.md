@@ -8,8 +8,8 @@ A template for quickly developing kits with Typescript and Rollup.
 
 ```bash
 # Clone it from Github.
-$ git clonehttps://github.com/HarryXiong24/rollup-ts-starter.git
-$ cd rollup-ts-starter
+$ git clone https://github.com/HarryXiong24/rollup-ts-kit-starter.git
+$ cd rollup-ts-kit-starter
 ```
 
 ```bash
