@@ -1,15 +1,15 @@
-# rollup-ts-kit-starter
+# Xbear-micro-frontends
 
 ## Description
 
-A template for quickly developing kits with Typescript and Rollup.
+A micro-frontends framework project.
 
 ## Usage
 
 ```bash
 # Clone it from Github.
-$ git clone https://github.com/HarryXiong24/rollup-ts-kit-starter.git
-$ cd rollup-ts-kit-starter
+$ git clone https://github.com/HarryXiong24/Xbear-micro-frontends.git
+$ cd webpack-ts-start
 ```
 
 ```bash

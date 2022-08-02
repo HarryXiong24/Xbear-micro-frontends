@@ -9,13 +9,15 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
     "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "lib",
     "paths": {
       "@/*": ["./src/*"]
     }

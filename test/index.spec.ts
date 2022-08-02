@@ -1,5 +1,5 @@
-import Demo from '../src/main';
+import { start } from '../src';
 
 test('demo', () => {
-  expect(Demo()).toBe(true);
+  expect(start()).toBe(true);
 });
