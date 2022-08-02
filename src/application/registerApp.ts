@@ -1,5 +1,5 @@
 import { Application, AppStatus } from '@/types';
-import { apps } from './apps';
+import { apps } from './loadingApp';
 
 /**
  * 注册子应用

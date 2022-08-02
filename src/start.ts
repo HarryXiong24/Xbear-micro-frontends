@@ -1,4 +1,4 @@
-import { loadApps } from './application/apps';
+import { loadApps } from './application/loadingApp';
 
 let isStarted = false;
 

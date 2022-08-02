@@ -1,5 +1,5 @@
 import overwriteEventsAndHistory from './navigator';
-export { default as registerApplication } from './application/registerApplication';
+export { default as registerApplication } from './application/registerApp';
 export { default as start } from './start';
 
 declare const window: any;

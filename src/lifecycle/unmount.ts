@@ -20,6 +20,7 @@ export default function unMountApp(app: Application): Promise<any> {
 
   return result
     .then(() => {
+      // 转换成 unmounted，又可以随时重新挂载
       app.status = AppStatus.UNMOUNTED;
     })
     .catch((err: Error) => {

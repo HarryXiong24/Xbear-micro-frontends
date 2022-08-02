@@ -47,6 +47,10 @@ function isActive(app: Application) {
   );
 }
 
+/**
+ * @return {*}
+ * @description: 加载应用
+ */
 export async function loadApps() {
   // 先卸载所有失活的子应用
   const toUnMountApp = getAppsWithStatus(AppStatus.MOUNTED);
@@ -62,5 +66,5 @@ export async function loadApps() {
   ];
 
   // 加载所有符合条件的子应用
-  toMountApp.map(mountApp);
+  await Promise.all(toMountApp.map(mountApp));
 }
