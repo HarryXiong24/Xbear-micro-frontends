@@ -1,24 +1,31 @@
-import { isPromise, validateIsLifeCycleFunc, getProps } from '../utils/common';
-import { Application, AppStatus } from '../types';
+import { isPromise, validateIsFunc, getProps } from '@/utils/common';
+import { Application, AppStatus } from '@/types';
 
 export default async function createApp(app: Application) {
   const { create, mount, unmount } = await app.loadApp();
 
-  // 验证是否为函数
-  if (create) {
-    validateIsLifeCycleFunc('create', create);
+  // 验证是否存在
+  if (create && validateIsFunc('create', create)) {
+    app.create = create;
+  } else {
+    app.create = () => {
+      console.warn('This app has no create method');
+    };
   }
-  if (mount) {
-    validateIsLifeCycleFunc('mount', mount);
+  if (mount && validateIsFunc('mount', mount)) {
+    app.mount = mount;
+  } else {
+    app.mount = () => {
+      console.warn('This app has no mount method');
+    };
   }
-  if (unmount) {
-    validateIsLifeCycleFunc('unmount', unmount);
+  if (unmount && validateIsFunc('unmount', unmount)) {
+    app.unmount = unmount;
+  } else {
+    app.unmount = () => {
+      console.warn('This app has no unmount method');
+    };
   }
-
-  // 复制出来
-  app.create = create;
-  app.mount = mount;
-  app.unmount = unmount;
 
   // 提取参数
   try {
@@ -28,7 +35,7 @@ export default async function createApp(app: Application) {
     throw err;
   }
 
-  let result = app.create!(app.props);
+  let result = app.create(app.props);
 
   if (!isPromise(result)) {
     result = Promise.resolve(result);

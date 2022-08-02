@@ -18,7 +18,7 @@ export function registerApplication(app: Application) {
     const path = app.activeRule;
     // 将 activeRule 变成函数
     app.activeRule = (location: Location = window.location) =>
-      location.pathname === path;
+      location.hash === path;
   }
 
   // 设置状态

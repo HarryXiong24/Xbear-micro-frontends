@@ -1,7 +1,7 @@
-import createApp from '../lifecycle/create';
-import mountApp from '../lifecycle/mount';
-import unMountApp from '../lifecycle/unmount';
-import { Application, AppStatus } from '../types';
+import createApp from '@/lifecycle/create';
+import mountApp from '@/lifecycle/mount';
+import unMountApp from '@/lifecycle/unmount';
+import { Application, AppStatus } from '@/types';
 
 // 存放 App 的容器
 export const apps: Application[] = [];

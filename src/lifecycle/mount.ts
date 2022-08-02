@@ -1,5 +1,5 @@
-import { getProps, isPromise } from '../utils/common';
-import { Application, AppStatus } from '../types';
+import { getProps, isPromise } from '@/utils/common';
+import { Application, AppStatus } from '@/types';
 
 export default function mountApp(app: Application): Promise<any> {
   app.status = AppStatus.BEFORE_MOUNT;

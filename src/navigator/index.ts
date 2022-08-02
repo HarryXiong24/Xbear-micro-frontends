@@ -1,4 +1,4 @@
-import { loadApps } from '../application/apps';
+import { loadApps } from '@/application/apps';
 
 /**
  * 监听页面 URL 变化，切换子应用
