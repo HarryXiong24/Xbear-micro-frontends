@@ -12,6 +12,7 @@ export default function unMountApp(app: Application): Promise<any> {
     throw err;
   }
 
+  // 执行 unmount 函数里面的内容
   let result = app.unmount!(app.props);
 
   if (!isPromise(result)) {

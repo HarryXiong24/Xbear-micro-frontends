@@ -35,6 +35,7 @@ export default async function createApp(app: Application) {
     throw err;
   }
 
+  // 执行 create 函数里面的内容
   let result = app.create(app.props);
 
   if (!isPromise(result)) {

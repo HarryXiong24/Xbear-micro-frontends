@@ -12,6 +12,7 @@ export default function mountApp(app: Application): Promise<any> {
     throw err;
   }
 
+  // 执行 mount 函数里面的内容
   let result = app.mount!(app.props);
 
   if (!isPromise(result)) {
