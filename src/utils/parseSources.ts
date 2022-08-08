@@ -19,7 +19,7 @@ function isCorrectURL(url = '') {
  */
 export default function parseSources(app: Application) {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return new Promise<void>(async (resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     const pageEntry = app.pageEntry;
 
     // 检查是否是合法的 url
@@ -30,7 +30,10 @@ export default function parseSources(app: Application) {
     // load html
     let html = '';
     try {
-      html = await loadSourceText(pageEntry); // load html
+      // load html
+      void loadSourceText(pageEntry).then((value) => {
+        html = value;
+      });
     } catch (error) {
       reject(error);
     }
@@ -54,7 +57,9 @@ export default function parseSources(app: Application) {
       .then((data) => {
         isStylesDone = true;
         addStyles(data as string[]);
-        if (isScriptsDone && isStylesDone) resolve();
+        if (isScriptsDone && isStylesDone) {
+          resolve();
+        }
       })
       .catch((err) => reject(err));
 
@@ -62,7 +67,9 @@ export default function parseSources(app: Application) {
       .then((data) => {
         isScriptsDone = true;
         executeScripts(data as string[]);
-        if (isScriptsDone && isStylesDone) resolve();
+        if (isScriptsDone && isStylesDone) {
+          resolve();
+        }
       })
       .catch((err) => reject(err));
   });
