@@ -1,8 +1,19 @@
 import { isPromise, validateIsFunc, getProps } from '@/utils/common';
 import { Application, AppStatus } from '@/types';
+import parseSources from '@/utils/parseSources';
+import getLifeCycleFunc from '@/utils/getLifeCycleFunc';
 
 export default async function createApp(app: Application) {
-  const { create, mount, unmount } = await app.loadApp();
+  // 加载 js css
+  try {
+    await parseSources(app);
+  } catch (error) {
+    console.log(error);
+  }
+
+  const { create, mount, unmount } = getLifeCycleFunc(app.name);
+
+  // const { create, mount, unmount } = await app.loadApp();
 
   // 验证是否存在
   if (create && validateIsFunc('create', create)) {

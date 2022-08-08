@@ -21,6 +21,10 @@ export function registerApplication(app: Application) {
       location.hash === path;
   }
 
+  // 初始化
+  app.pageBody = '';
+  app.loadedURLs = [];
+
   // 设置状态
   app.status = AppStatus.BEFORE_CREATE;
   // 存入 App 容器
