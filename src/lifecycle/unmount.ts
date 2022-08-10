@@ -13,7 +13,7 @@ export default function unMountApp(app: Application): Promise<any> {
   }
 
   // 执行 unmount 函数里面的内容
-  let result = app.unmount!(app.props);
+  let result = app.unmount!({ props: app.props, container: app.container });
 
   if (!isPromise(result)) {
     result = Promise.resolve(result);

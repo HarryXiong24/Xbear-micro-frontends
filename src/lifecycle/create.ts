@@ -47,7 +47,7 @@ export default async function createApp(app: Application) {
   }
 
   // 执行 create 函数里面的内容
-  let result = app.create(app.props);
+  let result = app.create({ props: app.props, container: app.container });
 
   if (!isPromise(result)) {
     result = Promise.resolve(result);

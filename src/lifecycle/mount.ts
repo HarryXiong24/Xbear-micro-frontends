@@ -13,7 +13,7 @@ export default function mountApp(app: Application): Promise<any> {
   }
 
   // 执行 mount 函数里面的内容
-  let result = app.mount!(app.props);
+  let result = app.mount!({ props: app.props, container: app.container });
 
   if (!isPromise(result)) {
     result = Promise.resolve(result);
