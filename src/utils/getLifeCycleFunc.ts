@@ -22,19 +22,21 @@ export function getLifeCycleFunc(name: string): {
   mount: (props: Record<string, any>) => any;
   unmount: (props: Record<string, any>) => any;
 } {
+  console.log(window);
+
   const result: any = window[`child-app-${name}` as any];
+
+  console.log(result);
 
   if (typeof result === 'function') {
     return result();
-  }
-
-  if (typeof result === 'object') {
+  } else if (typeof result === 'object') {
     return result;
+  } else {
+    throw Error(
+      `The micro app must inject the lifecycle("create" "mount" "unmount") into window['child-app-${name}']`
+    );
   }
-
-  throw Error(
-    `The micro app must inject the lifecycle("bootstrap" "mount" "unmount") into window['mini-single-spa-${name}']`
-  );
 }
 
 export default getLifeCycleFunc;

@@ -1,6 +1,8 @@
 import { Application, Source } from '../types';
 import { createElement, removeNode } from './dom';
 
+export const globalLoadedURLs: string[] = [];
+
 const urlReg = /^http(s)?:\/\//;
 
 /**
@@ -11,71 +13,6 @@ const urlReg = /^http(s)?:\/\//;
 function isCorrectURL(url = '') {
   return urlReg.test(url);
 }
-
-/**
- * @param {Application} app
- * @return {*}
- * @description: 注册子应用的时候，把子应用的入口 URL 写上，由微前端来负责加载资源文件
- */
-export default function parseSources(app: Application) {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return new Promise<void>((resolve, reject) => {
-    const pageEntry = app.pageEntry;
-
-    // 检查是否是合法的 url
-    if (!isCorrectURL(pageEntry)) {
-      return reject(Error(`${pageEntry} is not a valid url`));
-    }
-
-    // load html
-    let html = '';
-    try {
-      // load html
-      void loadSourceText(pageEntry).then((value) => {
-        html = value;
-      });
-    } catch (error) {
-      reject(error);
-    }
-
-    const domParser = new DOMParser();
-    const doc = domParser.parseFromString(html, 'text/html');
-
-    // 提取 script style
-    const { scripts, styles } = extractScriptsAndStyles(
-      doc as unknown as Element,
-      app
-    );
-
-    // 提取了 script style 后剩下的 body 部分的 html 内容
-    app.pageBody = doc.body.innerHTML;
-
-    let isStylesDone = false;
-    let isScriptsDone = false;
-    // 加载 style script 的内容
-    Promise.all(loadStyles(styles))
-      .then((data) => {
-        isStylesDone = true;
-        addStyles(data as string[]);
-        if (isScriptsDone && isStylesDone) {
-          resolve();
-        }
-      })
-      .catch((err) => reject(err));
-
-    Promise.all(loadScripts(scripts))
-      .then((data) => {
-        isScriptsDone = true;
-        executeScripts(data as string[]);
-        if (isScriptsDone && isStylesDone) {
-          resolve();
-        }
-      })
-      .catch((err) => reject(err));
-  });
-}
-
-export const globalLoadedURLs: string[] = [];
 
 function extractScriptsAndStyles(node: Element, app: Application) {
   if (!node.children.length) return { scripts: [], styles: [] };
@@ -248,4 +185,65 @@ export function addStyles(styles: string[] | HTMLStyleElement[]) {
       head.appendChild(item);
     }
   });
+}
+
+/**
+ * @param {Application} app
+ * @return {*}
+ * @description: 注册子应用的时候，把子应用的入口 URL 写上，由微前端来负责加载资源文件
+ */
+export default async function parseSources(app: Application) {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
+  const pageEntry = app.pageEntry;
+
+  // 检查是否是合法的 url
+  if (!isCorrectURL(pageEntry)) {
+    return Error(`${pageEntry} is not a valid url`);
+  }
+
+  // load html
+  let html = '';
+  try {
+    // load html
+    html = await loadSourceText(pageEntry);
+    console.log('html', html);
+  } catch (error) {
+    return error;
+  }
+
+  const domParser = new DOMParser();
+  const doc = domParser.parseFromString(html, 'text/html');
+
+  // 提取 script style
+  const { scripts, styles } = extractScriptsAndStyles(
+    doc as unknown as Element,
+    app
+  );
+
+  // 提取了 script style 后剩下的 body 部分的 html 内容
+  app.pageBody = doc.body.innerHTML;
+
+  let isStylesDone = false;
+  let isScriptsDone = false;
+  // 加载 style script 的内容
+  Promise.all(loadStyles(styles))
+    .then((data) => {
+      isStylesDone = true;
+      addStyles(data as string[]);
+      if (isScriptsDone && isStylesDone) {
+        return 'ok';
+      }
+    })
+    .catch((err) => err);
+
+  Promise.all(loadScripts(scripts))
+    .then((data) => {
+      isScriptsDone = true;
+      executeScripts(data as string[]);
+      if (isScriptsDone && isStylesDone) {
+        return 'ok';
+      }
+    })
+    .catch((err) => err);
 }
