@@ -8,5 +8,5 @@ module.exports = {
       'Access-Control-Allow-Origin': '*',
     },
   },
-  publicPath: '//localhost:8001/',
+  publicPath: 'http://localhost:8001/',
 };

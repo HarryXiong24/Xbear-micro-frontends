@@ -25,16 +25,17 @@ function render(options = {}) {
   }).$mount(container ? container.querySelector('#app') : '#app');
 }
 
-export async function create() {
+export function create() {
   console.log('[vue] vue app create');
 }
 
-export async function mount(options) {
+export function mount(options) {
+  console.log('options', options);
   console.log('[vue] options from main framework', options);
   render(options);
 }
 
-export async function unmount() {
+export function unmount() {
   app.$destroy();
   app.$el.innerHTML = '';
   app = null;

@@ -29,6 +29,7 @@ export function registerApplication(app: Application) {
   app.status = AppStatus.BEFORE_CREATE;
   // 存入 App 容器
   apps.push(app);
+  console.log(apps);
 }
 
 export default registerApplication;

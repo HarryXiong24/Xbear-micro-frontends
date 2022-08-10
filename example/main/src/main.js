@@ -18,14 +18,16 @@ registerApplication({
   name: 'vue',
   pageEntry: 'http://localhost:8001',
   activeRule: pathPrefix('/vue'),
-  container: $('#subapp-viewport'),
+  container: document.getElementById('subapp-viewport'),
 });
 
 registerApplication({
   name: 'react',
   pageEntry: 'http://localhost:8002',
   activeRule: pathPrefix('/react'),
-  container: $('#subapp-viewport'),
+  container: document.getElementById('subapp-viewport'),
 });
+
+console.log('finish');
 
 start();

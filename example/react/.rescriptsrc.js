@@ -1,11 +1,11 @@
 module.exports = {
-  webpack: config => {
-    config.output.publicPath = "//localhost:8002/";
+  webpack: (config) => {
+    config.output.publicPath = 'http://localhost:8002/';
 
     return config;
   },
 
-  devServer: _ => {
+  devServer: (_) => {
     const config = _;
 
     config.headers = {

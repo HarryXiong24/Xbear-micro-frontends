@@ -14,16 +14,16 @@ function render(options = {}) {
   );
 }
 
-export async function create() {
+export function create() {
   console.log('[react16] react app create');
 }
 
-export async function mount(options) {
+export function mount(options) {
   console.log('[react16] options from main framework', options);
   render(options);
 }
 
-export async function unmount(options) {
+export function unmount(options) {
   const { container } = options;
   ReactDOM.unmountComponentAtNode(
     container
@@ -38,7 +38,6 @@ if (window.__IS_SINGLE_SPA__) {
     mount,
     unmount,
   };
-  console.log('react', window);
 } else {
   render();
 }
