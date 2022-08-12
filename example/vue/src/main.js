@@ -18,11 +18,17 @@ function render(options = {}) {
     routes,
   });
 
+  console.log(container ? container : document.querySelector('#app'));
+
   app = new Vue({
     router,
     store,
     render: (h) => h(App),
-  }).$mount(container ? container.querySelector('#app') : '#app');
+  }).$mount();
+
+  container.appendChild(app.$el);
+
+  console.log(app);
 }
 
 export function create() {
@@ -30,7 +36,6 @@ export function create() {
 }
 
 export function mount(options) {
-  console.log('options', options);
   console.log('[vue] options from main framework', options);
   render(options);
 }

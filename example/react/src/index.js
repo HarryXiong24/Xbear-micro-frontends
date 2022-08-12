@@ -6,11 +6,11 @@ import * as serviceWorker from './serviceWorker';
 function render(options = {}) {
   const { container } = options;
 
+  console.log('react', container);
+
   ReactDOM.render(
     <App />,
-    container
-      ? container.querySelector('#root')
-      : document.querySelector('#root')
+    container ? container : document.querySelector('#root')
   );
 }
 
@@ -26,9 +26,7 @@ export function mount(options) {
 export function unmount(options) {
   const { container } = options;
   ReactDOM.unmountComponentAtNode(
-    container
-      ? container.querySelector('#root')
-      : document.querySelector('#root')
+    container ? container : document.querySelector('#root')
   );
 }
 
